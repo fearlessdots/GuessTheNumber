@@ -42,3 +42,6 @@ You can always choose the custom option to set a maximum number of your choice.
 3. After each guess, the game will tell you if your guess was too high or too low and show how many chances you have left.
 4. If you guess the number correctly, you win! The game will ask if you want to play again.
 5. If you don't guess the number correctly within the maximum number of chances, you lose. The game will ask if you want to play again.
+
+## License
+GuessTheNumber is licensed under the GPL-3.0 license.
