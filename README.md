@@ -7,10 +7,16 @@ A simple command-line game written in Go where the player tries to guess a rando
 To play the game, run this:
 
 ```shell
-git clone https://github.com/your-username/GuessTheNumber.git
+git clone https://github.com/fearlessdots/GuessTheNumber.git
 cd GuessTheNumber
 make build
 ./GuessTheNumber
+```
+
+If you want, you can install the program by running:
+
+```shell
+sudo make install
 ```
 
 # Gameplay
