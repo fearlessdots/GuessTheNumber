@@ -11,18 +11,22 @@ GO_BUILD_FLAGS=-v
 
 .PHONY: deps
 deps:
+	@echo "====> Installing dependencies..."
 	go get -v
 
 .PHONY: build
 build: deps
+	@echo "====> Building binary..."
 	go build ${GO_BUILD_FLAGS}
 	strip ${BINARY_NAME}
 
 .PHONY: install
 install:
+	@echo "====> Installing binary..."
 	mkdir -p ${INSTALL_PATH}
 	cp ${BINARY_NAME} ${INSTALL_PATH}
 
 .PHONY: uninstall
 uninstall:
+	@echo "====> Uninstalling binary..."
 	rm ${INSTALL_PATH}/${BINARY_NAME}
