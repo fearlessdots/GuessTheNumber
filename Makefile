@@ -6,6 +6,7 @@ INSTALL_PATH=${DESTDIR}/usr/bin
 
 # Flags to pass to the go build command
 GO_BUILD_FLAGS=-v
+GO_BUILD_LDFLAGS=-w
 
 .DEFAULT_GOAL := build
 
@@ -22,7 +23,7 @@ deps:
 .PHONY: build
 build: deps
 	@echo "====> Building binary..."
-	go build ${GO_BUILD_FLAGS}
+	go build ${GO_BUILD_FLAGS} -ldflags "$(GO_BUILD_LDFLAGS)"
 	strip ${BINARY_NAME}
 
 .PHONY: install
