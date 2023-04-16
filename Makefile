@@ -9,6 +9,11 @@ GO_BUILD_FLAGS=-v
 
 .DEFAULT_GOAL := build
 
+.PHONY: clean
+clean:
+	@echo "====> Removing binary..."
+	rm ${BINARY_NAME}
+
 .PHONY: deps
 deps:
 	@echo "====> Installing dependencies..."
