@@ -8,9 +8,9 @@ import (
 	"time"
 
 	// External modules
-	"github.com/AlecAivazis/survey/v2"
-	"github.com/fatih/color"
-	"github.com/buger/goterm"
+	survey "github.com/AlecAivazis/survey/v2"
+	color "github.com/gookit/color"
+	goterm "github.com/buger/goterm"
 )
 
 //
@@ -18,21 +18,31 @@ import (
 //
 
 func showInfo(msg string) {
-    gray := color.New(color.FgHiBlack)
-    gray.Println(msg)
+	grayHex := "#808080"
+	gray := color.HEX(grayHex)
+
+	gray.Println(msg)
 }
 
 func showAttention(msg string) {
-    orange := color.New(color.FgHiYellow)
-    orange.Println(msg)
+	orangeHex := "#ffa860"
+	orange := color.HEX(orangeHex)
+
+	orange.Println(msg)
 }
 
 func showSuccess(msg string) {
-    color.Blue(msg)
+	blueHex := "#55aaff"
+	blue := color.HEX(blueHex)
+
+	blue.Println(msg)
 }
 
 func showError(msg string) {
-    color.Red(msg)
+	redHex := "#ff5050"
+	red := color.HEX(redHex)
+
+	red.Println(msg)
 }
 
 func hr(factor float64) {
@@ -57,7 +67,7 @@ func hr(factor float64) {
 //
 
 func finishProgram(code int) {
-    os.Exit(code)
+	os.Exit(code)
 }
 
 func terminalSize() (int, int, error) {
@@ -141,13 +151,13 @@ func (g *Game) menu() {
 			},
 		},
 	}
-	
+
 	var choice bool
-	
+
 	err := survey.Ask(maxchances_prompt, &choice)
 	if err != nil {
 		showAttention("Error displaying menu: " + err.Error())
-		finishProgram(1)			
+		finishProgram(1)
 	}
 
 	if !choice{
@@ -161,14 +171,14 @@ func (g *Game) menu() {
 		err := survey.AskOne(customchances_prompt, &number)
 		if err != nil {
 			showAttention("Error displaying menu: " + err.Error())
-			finishProgram(1)			
+			finishProgram(1)
 		}
 
 		g.max_chances = number
 	} else {
 		g.max_chances = 5
 	}
-	
+
 	// Game level
 	options := make([]string, len(g.levels) + 1)
 	for i, level := range g.levels {
@@ -199,7 +209,7 @@ func (g *Game) menu() {
 		err := survey.AskOne(prompt, &number)
 		if err != nil {
 			showAttention("Error displaying menu: " + err.Error())
-			finishProgram(1)			
+			finishProgram(1)
 		}
 
 		g.level = Level{
@@ -210,7 +220,7 @@ func (g *Game) menu() {
 		// Set game level
 		g.level = g.levels[option]
 	}
-	
+
 	// Run game
 	g.run()
 }
@@ -269,7 +279,7 @@ func (g *Game) alert(win bool) {
 	} else {
 		alerts = g.faiAlerts
 	}
-	
+
 	alert := alerts[rand.Intn(len(alerts))]
 
 	if win {
@@ -288,13 +298,13 @@ func (g *Game) restart() {
 			},
 		},
 	}
-	
+
 	var choice bool
-	
+
 	err := survey.Ask(prompt, &choice)
 	if err != nil {
 		showAttention("Error displaying menu: " + err.Error())
-		finishProgram(1)			
+		finishProgram(1)
 	}
 
 	if choice {
@@ -308,9 +318,9 @@ func (g *Game) restart() {
 }
 
 func main() {
-    // Seed the random number generator with the current time
-    rand.Seed(time.Now().UnixNano())
-    
+	// Seed the random number generator with the current time
+	rand.Seed(time.Now().UnixNano())
+
 	game := NewGame()
 	game.menu()
 }
